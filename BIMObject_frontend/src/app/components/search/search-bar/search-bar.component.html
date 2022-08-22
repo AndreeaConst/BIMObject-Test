@@ -1,0 +1,34 @@
+
+<form #form="ngForm" [formGroup]="searchForm" >
+    <mat-form-field class="form-field">
+        <mat-label>Search words</mat-label>
+        <input
+        matInput
+        #search
+        (keyup)="this.searchTerm$.next(search.value);"
+        formControlName="searchField"
+        />
+    </mat-form-field>
+    <small class="no-word-found" *ngIf="resultsEmpty$ | async">
+        No word found for this search
+    </small>
+      
+    <mat-form-field class="form-field">
+        <mat-label>Filter</mat-label>
+        <mat-select (selectionChange)="applyFilter()" formControlName="partOfSpeech">
+        <mat-option [value]="''">noun</mat-option>
+        <mat-option
+            *ngFor="let partOfSpeech of ['adjective', 'verb', 'preposition', 'pronoun']"
+            [value]="partOfSpeech"
+        >
+            {{ partOfSpeech }}</mat-option
+        >
+        </mat-select>
+    </mat-form-field>
+</form>
+  
+<app-search-results
+  *ngIf="words$ | async"
+  [words$]="words$"
+></app-search-results>
+  
