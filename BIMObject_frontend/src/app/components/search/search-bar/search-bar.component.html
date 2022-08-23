@@ -13,19 +13,6 @@
         <small class="no-university-found" *ngIf="!(results$ | async).length && search.value !== ''">
             No universities found for this search
         </small>
-          
-        <!-- <mat-form-field class="form-field">
-            <mat-label>Filter</mat-label>
-            <mat-select (selectionChange)="applyFilter()" formControlName="partOfSpeech">
-            <mat-option [value]="''">noun</mat-option>
-            <mat-option
-                *ngFor="let partOfSpeech of ['adjective', 'verb', 'preposition', 'pronoun']"
-                [value]="partOfSpeech"
-            >
-                {{ partOfSpeech }}</mat-option
-            >
-            </mat-select>
-        </mat-form-field> -->
     </form>
       
     <div *ngIf="isLoading$ | async" class="spinner">
@@ -33,8 +20,17 @@
     </div>
     <app-search-results
       *ngIf="!(isLoading$ | async)"
-      [results$]="results$"
+      [results]="currPageResults"
     ></app-search-results>
+
+    <mat-paginator
+        #paginator
+        (page)="onPageChange($event)"
+        [length]="resultsLength"
+        [pageSize]="10"
+        showFirstLastButtons
+    >
+</mat-paginator>
 </div>
 
   

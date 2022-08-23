@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
 import { Result } from 'src/app/models/http-request.model';
 import { DialogComponent } from '../../dialog/dialog.component';
 
@@ -9,15 +8,12 @@ import { DialogComponent } from '../../dialog/dialog.component';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.component.less']
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent {
 
-  @Input() results$ = new BehaviorSubject<Result[]>([]);
+  @Input() results: Result[];
   dialogRef: MatDialogRef<DialogComponent>;
   
   constructor(public dialog: MatDialog) { }
-
-  ngOnInit(): void {
-  }
 
   openDialog(data) {
     this.dialogRef = this.dialog.open(DialogComponent, {

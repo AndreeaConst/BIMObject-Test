@@ -14,7 +14,7 @@ import { Result } from '../models/http-request.model';
 })
 export class HttpdatabaseService {
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   search(country: Observable<string>) {
     return country.pipe(
@@ -34,7 +34,7 @@ export class HttpdatabaseService {
     country: string
   ): Observable<Result[]> {
     const apiUrl = 'http://universities.hipolabs.com/search';
-    return this._httpClient.get<Result[]>(apiUrl, {
+    return this.httpClient.get<Result[]>(apiUrl, {
       params: new HttpParams()
         .set('country', country),
     });
