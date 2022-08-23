@@ -1,9 +1,35 @@
-.no-unviersity-found {
-    color: #424242;
-}
-
-.form-field {
-    width: 50%;
-    padding-left: 100px;
-    padding-top: 100px;
+.search-container {
+    .spinner {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .no-university-found {
+        color: red;
+    }
+    
+    .form-field {
+        width: 50%;
+        padding-left: 100px;
+        padding-top: 100px;
+    }
+    
+    ::ng-deep .mat-form-field {
+    
+        .mat-input-element {
+            color: black;
+        }
+        .mat-form-field-label {
+            color: slategray;
+        }
+        .mat-form-field-underline {
+            background-color: slategray;
+        }
+        .mat-form-field-ripple {
+            background-color: slategray;
+        }
+        .mat-form-field-required-marker {
+            color: slategray;
+        }
+    }
 }

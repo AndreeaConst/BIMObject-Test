@@ -1,1 +1,17 @@
-<p>dialog works!</p>
+<h3 mat-dialog-title color="primary">{{university.name}}</h3>
+<div mat-dialog-content>
+  <div>
+    <p><strong>Country: </strong>{{ university.country }}</p>
+    <p><strong>WebPages List:</strong></p>
+    <div *ngFor="let webPage of university.web_pages">
+        {{webPage}}
+    </div>
+    <p><strong>Domains List:</strong></p>
+    <div *ngFor="let domain of university.domains">
+        {{domain}}
+    </div>
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -13,6 +13,7 @@ import { HttpdatabaseService } from 'src/app/services/httpdatabase.service';
 export class SearchBarComponent implements OnInit, OnDestroy {
   results$ = new BehaviorSubject<Result[]>([]);
   searchTerm$ = new BehaviorSubject<string>('');
+  isLoading$ = new BehaviorSubject<boolean>(true);
   searchSub: Subscription;
 
   searchForm: FormGroup = new FormGroup({});
@@ -23,7 +24,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.searchForm = this.fb.group({
-      searchField: ['']
+      searchField: ['', {disabled: true}]
     });
 
     this.loadData();
@@ -31,7 +32,11 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   loadData() {
     this.searchSub = this.httpdatabaseService.search(this.searchTerm$).subscribe((response: Result[]) => {
+      this.searchForm.get('searchField').enable();
+      this.isLoading$.next(false);
       this.results$.next(response);
+
+      console.log(response);
     });
   }
 

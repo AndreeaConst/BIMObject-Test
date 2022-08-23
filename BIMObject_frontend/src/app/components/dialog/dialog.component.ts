@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Result } from 'src/app/models/http-request.model';
 
 @Component({
   selector: 'app-dialog',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: Result,
+    private dialogRef: MatDialogRef<DialogComponent>
+  ) {}
 
-  ngOnInit(): void {
+  panelOpenState: boolean;
+  characterInfo: any;
+
+  get university() {
+    return this.data['universityData'];
+  }
+
+  goToSearch(name: string) {
+    this.dialogRef.close(name);
+  }
+
+  ngOnInit() {
   }
 
 }
