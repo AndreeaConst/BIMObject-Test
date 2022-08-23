@@ -1,7 +1,7 @@
 
 <form #form="ngForm" [formGroup]="searchForm" >
     <mat-form-field class="form-field">
-        <mat-label>Search words</mat-label>
+        <mat-label>Search country</mat-label>
         <input
         matInput
         #search
@@ -9,11 +9,11 @@
         formControlName="searchField"
         />
     </mat-form-field>
-    <small class="no-word-found" *ngIf="resultsEmpty$ | async">
-        No word found for this search
+    <small class="no-unviersity-found" *ngIf="!(results$ | async).length">
+        No universities found for this search
     </small>
       
-    <mat-form-field class="form-field">
+    <!-- <mat-form-field class="form-field">
         <mat-label>Filter</mat-label>
         <mat-select (selectionChange)="applyFilter()" formControlName="partOfSpeech">
         <mat-option [value]="''">noun</mat-option>
@@ -24,11 +24,11 @@
             {{ partOfSpeech }}</mat-option
         >
         </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 </form>
   
 <app-search-results
-  *ngIf="words$ | async"
-  [words$]="words$"
+  *ngIf="results$ | async"
+  [results$]="results$"
 ></app-search-results>
   

@@ -1,1 +1,10 @@
-<p>search-results works!</p>
+<div class="flex-container">
+    <mat-card class="flex-item card mat-elevation-z2" *ngFor="let char of results$ | async">
+      <mat-card-header>
+        <mat-card-title>{{char.name}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-actions>
+        <a (click)="openDialog(char)" mat-stroked-button color="primary">More information</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
